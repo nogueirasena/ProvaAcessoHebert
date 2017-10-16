@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+
+
+
+
+
+<div class="jumbotron" style="background-color: #ccd4d4;text-align: center;">
+    <img src="https://www.acessocard.com.br/wp-content/themes/acesso-card/ghost/assets/images/common/branding.svg" style="width: 200px;"/>
+   
+    @using (Html.BeginForm("Busca", "Home", FormMethod.Post))
+    {
+        <div class="form-group">
+            <input title="Não são aceitos caracters especiais." type="text" maxlength="20" required pattern="^[a-zA-Z_\-]+$" style="margin-bottom: 10px" class="form-control" name="TextoBusca" id="TextoBusca" placeholder="Digite sua #Hashtag">
+        </div>
+        <input class="btn btn-default" type="submit" value="Buscar" />
+    }
+    <div style="border: 1px solid white;margin-top: 30px;">
+        <table class="table table-hover" style="margin: 0;">
+            <thead>
+            <tr>
+                <th>Ultimas #HashTags</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var buscas in TempData.Values)
+            {
+                <tr>     
+                    <td>
+                        <a  href="/Home/Busca/pesquisa/@buscas.ToString()" title="@buscas.ToString()"  name="TextoBusca" id="TextoBusca" >
+                            @buscas.ToString()
+                        </a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>

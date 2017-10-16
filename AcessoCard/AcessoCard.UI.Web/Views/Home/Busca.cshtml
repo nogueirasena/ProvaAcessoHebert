@@ -1,0 +1,61 @@
+﻿@{
+    ViewBag.Title = "Busca";
+}
+<div class="jumbotron" style="background-color: #ccd4d4;text-align: center;">
+    <img src="https://www.acessocard.com.br/wp-content/themes/acesso-card/ghost/assets/images/common/branding.svg" style="width: 200px;" />
+    @using (Html.BeginForm("Busca", "Home", FormMethod.Post))
+    {
+    <div class="form-group">
+        <input title="Não são aceitos caracters especiais." type="text" maxlength="20" required pattern="^[a-zA-Z_\-]+$" style="margin-bottom: 10px" class="form-control" name="TextoBusca" id="TextoBusca" placeholder="Digite sua #Hashtag">
+    </div>
+    <input class="btn btn-default" type="submit" value="Buscar" />
+    }
+</div>
+<div widthmin="768" class="testimonial-swiper">
+    <div style="border: 1px solid white;float: left;margin-right: 101px;">
+        <table class="table table-hover" style="margin: 0;">
+            <thead>
+                <tr>
+                    <th>Ultimas #HashTags</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var buscas in TempData.Values.Reverse())
+            {
+                <tr>
+                    <td>
+                        <a href="/Home/Busca/pesquisa/@buscas.ToString()" title="@buscas.ToString()" name="TextoBusca" id="TextoBusca">
+                            @buscas.ToString()
+                        </a>
+                    </td>
+                </tr>
+
+            }
+            </tbody>
+        </table>
+    </div>
+
+<div ref="slider" class="swiper-slider">
+    <div class="">
+        @foreach (var ItemList in ViewBag.Twites)
+            {
+            <div class="swiper-slide">
+                <div class="card-testimonial post-236 ac_testimony type-ac_testimony status-publish has-post-thumbnail hentry">
+                    <figure class="profile">
+                        <img width="78" height="78" style="border-radius: 50%;" src="@ItemList.ProfileImage" class="attachment-full size-full wp-post-image" alt="Depoimento de Luisa Oliveira" title="Luisa Oliveira">
+                    </figure>
+                    <div class="card-content">
+                        <h3 class="title">@ItemList.UserName</h3>
+                        <p>“ @ItemList.Text “ </p>
+                        <div class="card-footer">
+                            <img src="http://www.pngall.com/wp-content/uploads/2016/07/Twitter-Download-PNG.png" style="width: 20px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+        <p style="font-size: 24px;">@ViewBag.error</p>
+    </div>
+</div>
+</div>
+
